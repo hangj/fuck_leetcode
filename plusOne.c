@@ -8,19 +8,19 @@
 
 int* plusOne(int* digits, int digitsSize, int* returnSize){
     int* result = malloc(sizeof(int)*(digitsSize+1));
-    int left = 1;
-    for(int i=digitsSize-1; left && i >= 0; i--){
-        int tmp = digits[i] + left;
+    int carry = 1;
+    for(int i=digitsSize-1; carry && i >= 0; i--){
+        int tmp = digits[i] + carry;
         digits[i] = tmp % 10;
-        left = tmp / 10;
+        carry = tmp / 10;
     }
 
     int* p = result;
     *returnSize = digitsSize;
-    if(left){
+    if(carry){
         *returnSize = digitsSize + 1;
         p = result + 1;
-        result[0] = left;
+        result[0] = carry;
     }
     
     for(int i=0; i < digitsSize; i++, p++){
