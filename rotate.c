@@ -5,10 +5,63 @@
 #include<stdlib.h>
 #include<string.h>
 
+
+static void reverse(int* nums, int from, int to) {
+  for (; from < to; from++, to--){
+      int tmp = nums[from];
+      nums[from] = nums[to];
+      nums[to] = tmp;
+  }
+}
+
+/*
+** Let x = AB, where A is a prefix of length 'n'. Then,
+** rotate x n == BA. But BA == (A^r . B^r)^r.
+*/
 void rotate(int* nums, int numsSize, int k){
-    if(k <= 0 || numsSize <= 1) return;
+    if(numsSize < 2 || k < 1) return;
     k = k % numsSize;
     if(k == 0) return;
+
+    reverse(nums, 0, numsSize - k - 1);
+    reverse(nums, numsSize - k, numsSize - 1);
+    reverse(nums, 0, numsSize - 1);
+}
+
+
+// -------------------------------------------------------------------------
+
+int gcd(int a, int b){
+    return b ? gcd(b, a % b) : a;
+}
+
+void rotate(int* nums, int numsSize, int k){
+    if(numsSize < 2 || k < 1) return;
+    k = k % numsSize;
+    if(k == 0) return;
+
+    int count = gcd(numsSize, k);
+
+    for(int i=0; i < count; i++){
+        // nums[ (i+k) % numsSize ] = nums[i];
+        int v = nums[i];
+        int j=(i+k)%numsSize;
+        for(; j != i; j=(j+k)%numsSize){
+            int tmp = nums[j];
+            nums[j] = v;
+            v = tmp;
+        }
+        nums[j] = v;
+    }
+}
+
+// --------------------------------------------------------------------------
+
+
+void rotate(int* nums, int numsSize, int k){
+    if(numsSize <= 1) return;
+    k = k % numsSize;
+    if(k <= 0) return;
 
     // nums[ (i+k) % numsSize ] = nums[i];
     // nums[i] = nums[ (i + numsSize - k) % numsSize ];
