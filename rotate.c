@@ -74,6 +74,7 @@ void rotate(int* nums, int numsSize, int k){
         int j = (i + numsSize - k) % numsSize;
         nums[i] = j >= 0 && j < s ? hash[ j ] : nums[j];
     }
+    free(hash);
 }
 
 void rotate(int* nums, int numsSize, int k){
@@ -107,6 +108,7 @@ void rotate(int* nums, int numsSize, int k){
         int j = (i + numsSize - k) % numsSize;
         nums[i] = j >= left && j < right ? hash[ j-left ] : nums[j];
     }
+    free(hash);
 }
 
 
