@@ -2,7 +2,7 @@
 // https://leetcode-cn.com/problems/number-of-1-bits/
 
 int hammingWeight(uint32_t n) {
-    uint32_t count = 0;
+    int count = 0;
     uint32_t i = 1;
 
     for(;n;){
@@ -17,7 +17,7 @@ int hammingWeight(uint32_t n) {
 
 
 int hammingWeight(uint32_t n) {
-    uint32_t count = 0;
+    int count = 0;
 
     for(;n;){
         n &= n-1; // 消去最后一位 1 
