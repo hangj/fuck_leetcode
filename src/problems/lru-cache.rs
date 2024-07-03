@@ -283,3 +283,4 @@ impl LRUCache {
  * let ret_1: i32 = obj.get(key);
  * obj.put(key, value);
  */
+mod xx{}
